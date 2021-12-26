@@ -1,0 +1,38 @@
+docker-compose run django django-admin startproject core .
+docker exec -it postgres psql -U postgres
+
+docker-compose run django python manage.py migrate
+
+docker-compose up / down
+
+postgres
+===========
+
+docker exec -it postgres psql -U postgres
+\c <database_name>
+\d
+\d+ <table_name>
+\q
+
+===================
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'pgdb',
+        'PORT': '5432',
+    }
+}
+
+================
+
+$ docker exec -it django bash
+root@a5105a7df3b9:/usr/src/app#
+
+======================
+volumes:
+
+docker volume ls
+docker volume inspect django_pgdata

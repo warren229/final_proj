@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+    django:
+        build: ./core
+        image: 342388139647.dkr.ecr.us-west-1.amazonaws.com/final_proj
+        container_name: django
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+            - .:/usr/src/app
+        ports:
+            - "8000:8000"
+        depends_on:
+            - pgdb
+    pgdb:
+        image: postgres
+        container_name: pgdb
+        environment:
+            - POSTGRES_DB-postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+volumes:
+    pgdata:
